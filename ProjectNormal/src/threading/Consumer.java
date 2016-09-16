@@ -1,0 +1,42 @@
+package threading;
+
+public class Consumer implements Runnable
+	{
+		Producer producer;
+
+		int sleepInterval;
+
+		Consumer(Producer producer)
+			{
+				this(producer, 1000);
+			}
+
+		Consumer(Producer producer, int sleepInterval)
+			{
+				this.producer = producer;
+				this.sleepInterval = sleepInterval;
+			}
+
+		public void run()
+			{
+				while (true)
+					{
+						String message = producer.getMessage();
+						System.out.println("Got message: " + message);
+						try
+							{
+								Thread.sleep(sleepInterval);
+							}
+						catch (InterruptedException e)
+							{}
+					}
+			}
+
+		public static void main(String args[])
+			{
+				Producer producer = new Producer();
+				new Thread(producer).start();
+				Consumer consumer = new Consumer(producer);
+				new Thread(consumer).start();
+			}
+	}
