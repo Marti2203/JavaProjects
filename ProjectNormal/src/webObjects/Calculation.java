@@ -2,6 +2,10 @@ package webObjects;
 
 public class Calculation extends WorkRequest
 	{
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 		int n;
 
 		public Calculation(int n)

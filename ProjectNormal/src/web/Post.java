@@ -5,11 +5,14 @@ import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import javax.sound.sampled.AudioFormat.Encoding;
 import javax.swing.*;
 
 public class Post extends JPanel implements ActionListener
 	{
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 		JTextField nameField, passwordField;
 		String postURL;
 		GridBagConstraints constraints = new GridBagConstraints();
@@ -89,7 +92,7 @@ public class Post extends JPanel implements ActionListener
 		public static void main(String[] args)
 			{
 				JFrame frame = new JFrame("SimplePost");
-				frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.add(new Post(args[0]), "Center");
 				frame.pack();
 				frame.setVisible(true);

@@ -118,6 +118,7 @@ class HttpdConnection
 					key.interestOps(SelectionKey.OP_READ);
 			}
 
+		@SuppressWarnings("resource")
 		void processRequest(SelectionKey key)
 			{
 				buff.flip();

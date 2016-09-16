@@ -7,6 +7,7 @@ public class Server
 	{
 		public static void main(String argv[]) throws IOException
 			{
+				@SuppressWarnings("resource")
 				ServerSocket ss = new ServerSocket(Integer.parseInt(argv[0]));
 				while (true)
 					new ServerConnection(ss.accept()).start();
