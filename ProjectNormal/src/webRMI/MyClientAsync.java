@@ -1,7 +1,6 @@
 package webRMI;
 
 import java.rmi.*;
-import java.util.*;
 import webObjects.*;
 
 public class MyClientAsync extends java.rmi.server.UnicastRemoteObject implements WorkListener

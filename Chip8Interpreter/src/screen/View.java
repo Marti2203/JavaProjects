@@ -50,6 +50,7 @@ public class View extends JFrame
 				setVisible(true);
 			}
 
+		@SuppressWarnings("unused")
 		private void resizePixels(String s)
 			{
 				System.out.printf("Resized %s\n", s);

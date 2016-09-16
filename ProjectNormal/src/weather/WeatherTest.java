@@ -1,9 +1,5 @@
 package weather;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import com.cdyne.ws.weatherws.*;
 
 public class WeatherTest
