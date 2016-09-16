@@ -1,13 +1,11 @@
 package screen;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.text.MessageFormat;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class View extends JFrame
 	{
