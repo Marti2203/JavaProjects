@@ -2,7 +2,7 @@ package services;
 
 public enum StringExtender
 	{
-		Instance();
+		;
 		public static String CreateName(String name)
 			{
 				if(Character.isUpperCase(name.charAt(0)))

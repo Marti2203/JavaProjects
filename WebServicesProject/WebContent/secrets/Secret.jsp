@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Error</title>
+<title>Insert title here</title>
 </head>
 <body>
-Sorry For that.
-There was an error.
+<a href="http://i.imgur.com/6PlRXhI.gif">Heh</a>
 </body>
 </html>
