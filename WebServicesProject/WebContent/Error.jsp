@@ -21,7 +21,7 @@
 	<%=request.getAttribute("javax.servlet.error.exception")==null ? "" 
 			: "Exception is"
 				+request.getAttribute("javax.servlet.error.exception")
-				+"and the stack trace has been written to LatesException.txt" %>
+				+" and the stack trace has been written to LatesException.txt" %>
 	<br>
 </body>
 </html>

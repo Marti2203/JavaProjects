@@ -10,14 +10,10 @@
 	<error-page>
 		<location>/Error.jsp</location>
 	</error-page>
-	<servlet>
-		<servlet-name>helloclient1</servlet-name>
-		<servlet-class>services.HelloClient</servlet-class>
+		<servlet>
+		<servlet-name>waitServlet</servlet-name>
+		<servlet-class>servlets.WaitServlet</servlet-class>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>helloclient1</servlet-name>
-		<url-pattern>/helloCC</url-pattern>
-	</servlet-mapping>
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Secret documents</web-resource-name>
@@ -26,12 +22,23 @@
 		<auth-constraint>
 			<role-name>secretagent</role-name>
 		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
 	</security-constraint>
 	<login-config>
-		<auth-method>FORM</auth-method>
-		<form-login-config>
-			<form-login-page>/login.html</form-login-page>
-			<form-error-page>/login_error.html</form-error-page>
-		</form-login-config>
+		<auth-method>BASIC</auth-method>
 	</login-config>
+	<filter>
+		<filter-name>defaultsfilter1</filter-name>
+		<filter-class>filters.DefaultsFilter</filter-class>
+		<init-param>
+			<param-name>time</param-name>
+			<param-value>3</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>defaultsfilter1</filter-name>
+		<servlet-name>waitServlet</servlet-name>
+	</filter-mapping>
 </web-app>

@@ -1,4 +1,4 @@
-package services;
+package servlets;
 
 public enum StringExtender
 	{

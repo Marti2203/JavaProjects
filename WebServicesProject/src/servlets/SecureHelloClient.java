@@ -1,30 +1,29 @@
-package services;
+package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
- * Servlet implementation class ContextInfo
+ * Servlet implementation class SecureHelloClient
  */
-@WebServlet("/ContextInfo")
-public class ContextInfo extends HttpServlet
+@WebServlet("/secret/Hello")
+@ServletSecurity(@HttpConstraint(rolesAllowed = "secretagent"))
+public class SecureHelloClient extends HttpServlet
 	{
-		private static final long serialVersionUID = 2L;
+		private static final long serialVersionUID = 1L;
 
 		/**
 		 * @see HttpServlet#HttpServlet()
 		 */
-		public ContextInfo()
+		public SecureHelloClient()
 			{
 				super();
 				// TODO Auto-generated constructor stub
@@ -37,25 +36,11 @@ public class ContextInfo extends HttpServlet
 		protected void doGet(HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException
 			{
-				response.setContentType("text/html");
+				// TODO Auto-generated method stub
+				response.setContentType("text/html"); // must come first
 				PrintWriter out = response.getWriter();
-				out.println("<html><body>");
-				ServletContext context = getServletContext();
-				for (Method method : ServletContext.class.getMethods())
-					{
-						if (!method.getName().startsWith("get") || method.getParameterCount() != 0)
-							continue;
-						try
-							{
-								out.println(method.getName() + " " + method.invoke(context, new Object[]{}) + "<br>");
-							}
-						catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
-							{
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-					}
-				out.println("</body></html>");
+				out.println("<html><head><title>Welcome</title></head><body>" + "<h1>Hello Secret Agent!</h1>"
+						+ "</body></html>");
 			}
 
 		/**
