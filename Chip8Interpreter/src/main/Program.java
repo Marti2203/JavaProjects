@@ -1,24 +1,17 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Dimension;
 
-import screen.Pixel;
-import screen.View;
+import screen.*;
 
 public class Program
 	{
 
-		public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException
+		public static void main(String[] args)
 			{
-				Pixel one = new Pixel(40, 40, 100, Color.BLUE)
-						, two = new Pixel(10, 20, 100, Color.RED)
-						,three=new Pixel(50, 50, 300, Color.GRAY);
-
-				View screen = new View("Interpreter screen", 10, 10);
-
-				screen.add(one);
-				screen.add(two);
-				screen.add(three);
+				Screen frame = new Screen(new Dimension(800, 800));
+				frame.createScreen(20, 20);
 			}
 
 	}
