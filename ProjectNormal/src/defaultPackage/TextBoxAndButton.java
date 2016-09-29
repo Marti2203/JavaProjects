@@ -17,7 +17,8 @@ import javax.swing.JComponent;
 
 import projects.ListExtender;
 
-class TextBoxAndButton extends JComponent implements MouseMotionListener, ActionListener {
+class TextBoxAndButton extends JComponent implements MouseMotionListener, ActionListener
+{
 	/**
 	 * 
 	 */
@@ -31,7 +32,8 @@ class TextBoxAndButton extends JComponent implements MouseMotionListener, Action
 	int colorIndex; // Current index into someColors
 	static ArrayList<Field> someColors = CreateColors();
 
-	public TextBoxAndButton(String message,String ColorChangeText) {
+	public TextBoxAndButton(String message, String ColorChangeText)
+	{
 		theMessage = message;
 		theButton = new JButton(ColorChangeText);
 		setLayout(new FlowLayout());
@@ -39,54 +41,69 @@ class TextBoxAndButton extends JComponent implements MouseMotionListener, Action
 		theButton.addActionListener(this);
 		addMouseMotionListener(this);
 	}
-	public void paintComponent(Graphics g) {
+
+	public void paintComponent(Graphics g)
+	{
 		g.drawString(theMessage, messageX, messageY);
 	}
 
-	public void mouseDragged(MouseEvent e) {
+	public void mouseDragged(MouseEvent e)
+	{
 		messageX = e.getX();
 		messageY = e.getY();
 		repaint();
 	}
 
-	public void mouseMoved(MouseEvent e) {
+	public void mouseMoved(MouseEvent e)
+	{
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e)
+	{
 		// Did somebody push our button?
-		if (e.getSource() == theButton)
-			try {
-				changeColor();
-			} catch (IllegalArgumentException | IllegalAccessException e1) {
-				System.out.println("Failed at Action Performed");
-			}
+		if (e.getSource() == theButton) try
+		{
+			changeColor();
+		}
+		catch (IllegalArgumentException | IllegalAccessException e1)
+		{
+			System.out.println("Failed at Action Performed");
+		}
 	}
-	
+
 	public void changeText()
 	{
-		theMessage="Changed";
+		theMessage = "Changed";
 		repaint();
 	}
-	private static ArrayList<Field> CreateColors() {
-		String[] nonColorFields={"FACTOR","serialVersionUID"};
+
+	private static ArrayList<Field> CreateColors()
+	{
+		String[] nonColorFields =
+		{ "FACTOR", "serialVersionUID" };
 		Field[] declaredFields = Color.class.getDeclaredFields();
 		ArrayList<Field> staticFields = new ArrayList<Field>();
-		for (Field field : declaredFields) {
-			if (Modifier.isStatic(field.getModifiers()) 
-					&& !ListExtender.StringSearcher
-					.Contains(Arrays.asList(nonColorFields),field.getName())) {
+		for (Field field : declaredFields)
+		{
+			if (Modifier.isStatic(field.getModifiers())
+					&& !ListExtender.Contains(Arrays.asList(nonColorFields), field.getName()))
+			{
 				staticFields.add(field);
 			}
 		}
 		return staticFields;
 	}
-	
-	synchronized private void changeColor() throws IllegalArgumentException, IllegalAccessException {
+
+	synchronized private void changeColor() throws IllegalArgumentException, IllegalAccessException
+	{
 		// Change the index to the next color, awkwardly.
 		colorIndex = rng.nextInt(someColors.size());
-		try {
+		try
+		{
 			setForeground(currentColor());
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			System.out.println("Failed at Change Color");
 		}
 		// Use the new color.
@@ -94,15 +111,21 @@ class TextBoxAndButton extends JComponent implements MouseMotionListener, Action
 	}
 
 	@SuppressWarnings("finally")
-	synchronized private Color currentColor() throws IllegalArgumentException, IllegalAccessException {
+	synchronized private Color currentColor() throws IllegalArgumentException, IllegalAccessException
+	{
 		Color result = null;
-		try {
+		try
+		{
 			result = (Color) someColors.get(colorIndex).get(null);
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			System.out.println("Failed at CurrentColor");
 			System.out.println(String.format("Color is %s", someColors.get(colorIndex).toString()));
 			result = Color.black;
-		} finally {
+		}
+		finally
+		{
 			return result;
 		}
 	}

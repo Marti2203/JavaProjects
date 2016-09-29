@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="http://i.imgur.com/6PlRXhI.gif">Heh</a>
+<img src="http://i.imgur.com/6PlRXhI.gif">
 </body>
 </html>

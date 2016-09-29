@@ -18,7 +18,8 @@ import javax.swing.JComponent;
 
 import projects.ListExtender;
 
-class Blinker extends JComponent implements MouseMotionListener, ActionListener, Runnable {
+class Blinker extends JComponent implements MouseMotionListener, ActionListener, Runnable
+{
 	/**
 	 * 
 	 */
@@ -34,7 +35,8 @@ class Blinker extends JComponent implements MouseMotionListener, ActionListener,
 
 	boolean blinkState;
 
-	public Blinker(String message, int width, int height) {
+	public Blinker(String message, int width, int height)
+	{
 		theMessage = message;
 		theButton = new JButton("Change Color");
 		messageX = rng.nextInt(width);
@@ -47,39 +49,48 @@ class Blinker extends JComponent implements MouseMotionListener, ActionListener,
 		t.start();
 	}
 
-	public void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g)
+	{
 		g.setColor(blinkState ? getBackground() : currentColor());
 		g.drawString(theMessage, messageX, messageY);
 	}
 
-	public void mouseDragged(MouseEvent e) {
+	public void mouseDragged(MouseEvent e)
+	{
 		messageX = e.getX();
 		messageY = e.getY();
 		repaint();
 	}
 
-	public void mouseMoved(MouseEvent e) {
+	public void mouseMoved(MouseEvent e)
+	{
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == theButton)
-			changeColor();
+	public void actionPerformed(ActionEvent e)
+	{
+		if (e.getSource() == theButton) changeColor();
 	}
 
-	private static ArrayList<Field> CreateColors() {
-		String[] nonColorFields = { "FACTOR", "serialVersionUID" };
+	private static ArrayList<Field> CreateColors()
+	{
+		String[] nonColorFields =
+		{ "FACTOR", "serialVersionUID" };
 		Field[] declaredFields = Color.class.getDeclaredFields();
 		ArrayList<Field> staticFields = new ArrayList<Field>();
-		for (Field field : declaredFields) {System.out.println(field);
+		for (Field field : declaredFields)
+		{
+			System.out.println(field);
 			if (Modifier.isStatic(field.getModifiers())
-					&& !ListExtender.StringSearcher.Contains(Arrays.asList(nonColorFields), field.getName())) {
+					&& !ListExtender.Contains(Arrays.asList(nonColorFields), field.getName()))
+			{
 				staticFields.add(field);
 			}
 		}
 		return staticFields;
 	}
 
-	synchronized private void changeColor() {
+	synchronized private void changeColor()
+	{
 		// Change the index to the next color, awkwardly.
 		colorIndex = rng.nextInt(someColors.size());
 		setForeground(currentColor());
@@ -88,27 +99,38 @@ class Blinker extends JComponent implements MouseMotionListener, ActionListener,
 	}
 
 	@SuppressWarnings("finally")
-	synchronized private Color currentColor() {
+	synchronized private Color currentColor()
+	{
 		Color result = null;
-		try {
+		try
+		{
 			result = (Color) someColors.get(colorIndex).get(null);
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			System.out.println("Failed at CurrentColor");
 			System.out.println(String.format("Color is %s", someColors.get(colorIndex).toString()));
 			result = Color.black;
-		} finally {
+		}
+		finally
+		{
 			return result;
 		}
 	}
 
-	public void run() {
-		try {
-			while (true) {
+	public void run()
+	{
+		try
+		{
+			while (true)
+			{
 				blinkState = !blinkState; // Toggle blinkState.
 				repaint(); // Show the change.
 				Thread.sleep(300);
 			}
-		} catch (InterruptedException ie) {
+		}
+		catch (InterruptedException ie)
+		{
 		}
 	}
 }

@@ -1,70 +1,72 @@
 package screen;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class Screen extends JFrame
+{
+	/**
+	* 
+	*/
+	private Pixel[][] pixels;
+	private int rows;
+	private int cols;
+	private static final long serialVersionUID = 1L;
+
+	public Screen(int rows, int cols)
 	{
-		/**
-		* 
-		*/
-		private static final long serialVersionUID = 1L;
+		super();
+		this.rows=rows;
+		this.cols=cols;
+		pixels = new Pixel[rows][cols];
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.black);
+		panel.setLayout(new GridLayout(rows, cols, 1, 1));
+		panel.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		CreatePixles(rows, cols, panel);
+		add(new JScrollPane(panel));
 
-		public Screen()
-			{
-				super();
-				setLayout(new FlowLayout());
-				setVisible(true);
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			}
-
-		public Screen(Dimension size)
-			{
-				this();
-				setSize(size);
-			}
-
-		public void addPixel(int x, int y, int width, int height, Color color)
-			{
-				Pixel pixel = new Pixel(x, y, width, height);
-				pixel.setColor(color);
-				add(pixel);
-
-			}
-
-		public void addPixel(int x, int y, int width, int height)
-			{
-				addPixel(x, y, width, height, Color.BLACK);
-			}
-
-		public void addPixel(int x, int y, int width)
-			{
-				addPixel(x, y, width, width, Color.BLACK);
-			}
-
-		public void addPixel(int x, int y, int width, Color color)
-			{
-				addPixel(x, y, width, width, color);
-			}
-
-		public void createScreen(int xPixels, int yPixels)
-			{
-				Dimension currentDim = getSize();
-				System.out.println(currentDim);
-				int width = currentDim.width / xPixels;
-				int height = currentDim.width / yPixels;
-				for (int x = 0; x < xPixels; x++)
-					{
-						for (int y = 0; y < yPixels; y++)
-							{
-								addPixel(x * width, y * height, width, height);
-							}
-					}
-				list(System.out);
-			}
 	}
+
+	public Screen(int rows,int cols,boolean addColorPalette)
+	{
+		this(rows, cols);
+		if(addColorPalette)
+		{
+			
+		}
+	}
+	
+	public Pixel[][] getPixels()
+	{
+		return pixels;
+	}
+
+	private void CreatePixles(int rows, int cols, Container container)
+	{
+		new Thread(() ->
+		{
+			for (int x = 0; x < rows; x++)
+				for (int y = 0; y < cols; y++)
+				{
+
+					Pixel panel = new Pixel();
+					pixels[x][y] = panel;
+					panel.setBackground(Color.BLUE);
+					panel.setToolTipText(Integer.toString(y, 16) + "," + Integer.toString(x, 16));
+					container.add(panel);
+				}
+			setVisible(true);
+		}).start();
+	}
+	public int getRows(){return rows;}
+	public int getCols(){return cols;}
+}
