@@ -1,7 +1,11 @@
 package gui;
 
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -20,6 +24,15 @@ public class PictureButton
 			public void actionPerformed(ActionEvent ae)
 			{
 				System.out.println("Urp!");
+				try
+				{
+					Desktop.getDesktop().browse(new URI("https://imgur.com"));
+				}
+				catch (IOException | URISyntaxException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		frame.getContentPane().add(button);

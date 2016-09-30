@@ -25,6 +25,7 @@ public class MysteryOfTheUniverse extends JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(300, 300);
 		textArea = new JTextArea();
+		textArea.setEditable(false);
 		solveButton = new JButton("Solve Mystery");
 		solveButton.addActionListener(new ActionListener()
 		{

@@ -6,8 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
 
@@ -42,8 +40,7 @@ public class Editor extends JFrame implements ActionListener
 		newItem.setMnemonic(KeyEvent.VK_N);
 		newItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK));
 		menu.add(newItem);
-		
-		
+
 		JMenuItem openItem = makeMenuItem("Open");
 		openItem.setMnemonic(KeyEvent.VK_O);
 		openItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK));
@@ -87,6 +84,7 @@ public class Editor extends JFrame implements ActionListener
 				saveFile();
 				break;
 			case "New":
+				newFile();
 				break;
 			case "Save As":
 				saveNewFile();
@@ -95,6 +93,26 @@ public class Editor extends JFrame implements ActionListener
 				System.out.println("ERROR");
 				break;
 		}
+	}
+
+	private void newFile()
+	{
+		if (textPane.getText().equals("")) return;
+		int resultOption = JOptionPane.showConfirmDialog(null, "Do you want to save the current file?");
+		if (resultOption == JOptionPane.CANCEL_OPTION)
+			return;
+		else if (resultOption == JOptionPane.NO_OPTION)
+			clearTextPane();
+		else
+		{
+			saveFile();
+			clearTextPane();
+		}
+	}
+
+	private void clearTextPane()
+	{
+		textPane.setText("");
 	}
 
 	private void loadFile()
@@ -106,38 +124,13 @@ public class Editor extends JFrame implements ActionListener
 		{
 			File file = chooser.getSelectedFile();
 			currentFile = file;
+			@SuppressWarnings("deprecation")
 			java.net.URL url = file.toURL();
 			textPane.setPage(url);
 		}
 		catch (Exception e)
 		{
 			textPane.setText("Could not load file: " + e);
-		}
-	}
-
-	private void saveFileOld()
-	{
-		JFileChooser chooser = new JFileChooser();
-		if (currentFile != null) chooser.setCurrentDirectory(currentFile);
-
-		int resultChooser = chooser.showSaveDialog(this);
-		if (resultChooser == JFileChooser.CANCEL_OPTION) return;
-		try
-		{
-			File file = chooser.getSelectedFile();
-			if (file.exists() || file.equals(currentFile))
-			{
-				int resultOption = JOptionPane.showConfirmDialog(null, "Do you want to overwrite the file?");
-				if (resultOption != JOptionPane.OK_OPTION) { return; }
-			}
-			currentFile = file;
-			Writer writer = new PrintWriter(file);
-			writer.write(textPane.getText());
-			writer.close();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
 		}
 	}
 

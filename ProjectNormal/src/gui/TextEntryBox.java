@@ -28,7 +28,7 @@ public class TextEntryBox
 			public void actionPerformed(ActionEvent ae)
 			{
 				if (field.getText().startsWith("/"))
-					runCommand(field.getText());
+					runCommand(field.getText().toLowerCase());
 				else area.append(field.getText() + '\n');
 				field.setText("");
 			}

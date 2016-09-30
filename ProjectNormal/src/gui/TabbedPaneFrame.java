@@ -10,6 +10,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class TabbedPaneFrame
 {
@@ -23,6 +25,16 @@ public class TabbedPaneFrame
 		JList<String> list = new JList<>(new String[]
 		{ "Web server", "FTP server" });
 		list.setBorder(BorderFactory.createRaisedBevelBorder());
+		list.addListSelectionListener(new ListSelectionListener()
+		{
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e)
+			{
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		controls.add(list);
 		controls.add(new JButton("Start"));
 		// create an image pane
