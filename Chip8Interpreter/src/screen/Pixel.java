@@ -1,5 +1,6 @@
 package screen;
 
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 public class Pixel extends JPanel

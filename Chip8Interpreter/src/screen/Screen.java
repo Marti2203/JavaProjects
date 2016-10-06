@@ -65,6 +65,7 @@ public class Screen extends JFrame
 					container.add(panel);
 				}
 			setVisible(true);
+			repaint();
 		}).start();
 	}
 	public int getRows(){return rows;}

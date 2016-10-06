@@ -23,25 +23,24 @@ public class TabbedPaneFrame
 		JPanel controls = new JPanel();
 		controls.add(new JLabel("Service:"));
 		JList<String> list = new JList<>(new String[]
-		{ "Web server", "FTP server" });
+		{ "Web server", "FTP server","Bitcoin server","Tor Node","1","2","3","4","5"});
+		list.setVisibleRowCount(4);
 		list.setBorder(BorderFactory.createRaisedBevelBorder());
 		list.addListSelectionListener(new ListSelectionListener()
 		{
-			
 			@Override
 			public void valueChanged(ListSelectionEvent e)
 			{
-				// TODO Auto-generated method stub
-				
+				//System.out.println(list.getSelectedValuesList());
 			}
 		});
-		controls.add(list);
+		controls.add(new JScrollPane(list));
 		controls.add(new JButton("Start"));
 		// create an image pane
 		String filename = "Images/rhino.gif";
 		JLabel image = new JLabel(new ImageIcon(filename));
 		JComponent picture = new JScrollPane(image);
-		tabby.addTab("Controls", controls);
+		tabby.addTab("Controls",controls);
 		tabby.addTab("Picture", picture);
 		frame.getContentPane().add(tabby);
 		frame.setSize(200, 200);
