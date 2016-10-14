@@ -16,6 +16,6 @@ public class Program
 		//frame.setSize(200, 200);
 		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//frame.setVisible(true);
-		CombinedColorChooser chooser=new CombinedColorChooser(screen);
+		ColorChooser chooser=new SimpleColorChooser(screen);
 	}
 }

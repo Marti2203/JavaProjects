@@ -45,18 +45,6 @@ public abstract class ColorChooser
 		frame.getContentPane().addMouseListener(mouseListener);
 	}
 
-	public ColorChooser(Screen screen)
-	{
-		this((JFrame) screen);
-		for (int x = 0; x < screen.getCols(); x++)
-		{
-			for (int y = 0; y < screen.getRows(); y++)
-			{
-				screen.getPixels()[x][y].addMouseListener(mouseListener);
-			}
-		}
-	}
-
 	protected abstract void treatPopupTrigger(MouseEvent e);
 
 }

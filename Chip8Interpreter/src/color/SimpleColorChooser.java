@@ -17,7 +17,7 @@ import screen.Screen;
 import utils.CharExtender;
 import utils.ListExtender;
 
-public class SimpleColorChooser extends ColorChooser implements ActionListener
+public class SimpleColorChooser extends ScreenColorChooser implements ActionListener
 {
 	JPopupMenu colorMenu = new JPopupMenu("Color");
 	static ArrayList<String> ColorNames = new ArrayList<>();

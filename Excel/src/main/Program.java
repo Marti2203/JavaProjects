@@ -16,6 +16,6 @@ public class Program
 		frame.getContentPane().add(new JScrollPane(table));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
-		frame.show();
+		frame.setVisible(true);
 	}
 }

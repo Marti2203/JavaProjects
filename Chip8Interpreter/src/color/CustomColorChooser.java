@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 import screen.Screen;
 
-public class CustomColorChooser extends ColorChooser
+public class CustomColorChooser extends ScreenColorChooser
 {
 	JFrame frame;
 
