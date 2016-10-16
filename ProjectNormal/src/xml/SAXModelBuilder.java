@@ -18,13 +18,12 @@ public class SAXModelBuilder extends DefaultHandler {
 
     Stack<Object> stack = new Stack<>();
 
-    public void startElement(String namespace, String localname, String qname,
-            Attributes atts) throws SAXException {
-// Construct the new element and set any attributes on it
+    public void startElement(String namespace, String localname, String qname, Attributes atts) throws SAXException {
+        // Construct the new element and set any attributes on it
         Object element;
         try {
-            String className = Character.toUpperCase(qname.charAt(0))
-                    + qname.substring(1);
+            String className = Character.toUpperCase(qname.charAt(0)) + qname.substring(1);
+            System.out.println(className);
             element = Class.forName(className).newInstance();
         } catch (Exception e) {
             element = new StringBuffer();
@@ -39,9 +38,8 @@ public class SAXModelBuilder extends DefaultHandler {
         stack.push(element);
     }
 
-    public void endElement(String namespace, String localname, String qname)
-            throws SAXException {
-// Add the element to its parent
+    public void endElement(String namespace, String localname, String qname) throws SAXException {
+        // Add the element to its parent
         if (stack.size() > 1) {
             Object element = stack.pop();
             try {
@@ -53,7 +51,7 @@ public class SAXModelBuilder extends DefaultHandler {
     }
 
     public void characters(char[] ch, int start, int len) {
-// Receive element content text
+        // Receive element content text
         String text = new String(ch, start, len);
         if (text.trim().length() == 0) {
             return;
@@ -63,19 +61,21 @@ public class SAXModelBuilder extends DefaultHandler {
 
     void setProperty(String name, Object target, Object value)
             throws SAXException, IllegalAccessException, NoSuchFieldException {
+        // Convert values to field type
+        System.out.println(target.getClass());
         Field field = target.getClass().getField(name);
-// Convert values to field type
+
         if (value instanceof StringBuffer) {
             value = value.toString();
         }
+
         if (field.getType() == Double.class) {
             value = Double.parseDouble(value.toString());
         }
         if (Enum.class.isAssignableFrom(field.getType())) {
-            value = Enum.valueOf((Class<Enum>) field.getType(),
-                    value.toString());
+            value = Enum.valueOf((Class<Enum>) field.getType(), value.toString());
         }
-// Apply to field
+        // Apply to field
         if (field.getType() == value.getClass()) {
             field.set(target, value);
         } else if (Collection.class.isAssignableFrom(field.getType())) {

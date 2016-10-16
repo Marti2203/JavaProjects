@@ -9,19 +9,14 @@ package xml;
  *
  * @author marti
  */
-public class Animal {
-
-    public static enum AnimalClass {
-        mammal, reptile, bird, fish, amphibian,
-        invertebrate
-    }
-    public AnimalClass animalClass;
+public class Animal {    
+    public AnimalClass animalType;
     public String name, species, habitat, food, temperament;
     public Double weight;
     public FoodRecipe foodRecipe;
 
     @Override
     public String toString() {
-        return name + "(" + animalClass + "," + species + ")";
+        return name + "(" + animalType + "," + species + ")";
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <inventory>
-    <animal animalClass="mammal">
+    <animal>
+        <animalType>mammal</animalType>
         <name>Song Fang</name>
         <species>Giant Panda</species>
         <habitat>China</habitat>
@@ -8,8 +9,8 @@
         <temperament>Friendly</temperament>
         <weight>45.0</weight>
     </animal>
-    <animal animalClass="mammal">
-        <name>Harambe</name>
+    <animal animalType="mammal">
+        <name>Harambe</name> 
         <species>Gorilla</species>
         <habitat>Central Africa</habitat>
         <foodRecipe>
