@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package xml;
+package jaxb;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,12 @@ import java.util.List;
  *
  * @author marti
  */
-public class Inventory {
-    public List<Animal> animal = new ArrayList<>();
+public class FoodRecipe {
+
+    public String name;
+    public List<String> ingredient = new ArrayList<String>();
+
+    public String toString() {
+        return name + ": " + ingredient.toString();
+    }
 }

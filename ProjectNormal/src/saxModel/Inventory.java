@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package xml;
+package saxModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author marti
  */
-public enum AnimalClass {
-    mammal, reptile, bird, fish, amphibian,
-    invertebrate
+public class Inventory {
+    public List<Animal> animal = new ArrayList<>();
 }
